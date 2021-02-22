@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+      body {
+        position: relative;
+        background-color: black;
+        cursor: none;
+        overflow: hidden;
+      }
+      h1 {
+        color: #fff;
+      }
+
+      .model {
+        position: absolute;
+        left: calc(50% - 150px);
+        width: 300px;
+        z-index: 100;
+      }
+
+
+    </style>
+    <script>
+      let model;
+      let background;
+      let x = 0;
+      let y = 0;
+      let mx = 0;
+      let my = 0;
+      let speed = 0.09;
+      // let h1;
+
+      window.onload = function () {
+        // h1 = document.getElementsByTagName("h1")[0];
+        model = document.getElementsByClassName("model")[0];
+        background = document.getElementsByClassName("background")[0];
+
+        window.addEventListener("mousemove", mouseFunc, false);
+
+        function mouseFunc(e) {
+          x = (e.clientX - window.innerWidth / 2);
+          y = (e.clientY - window.innerHeight / 2);
+        }
+        loop()
+      }
+
+      function loop() {
+        mx += (x - mx) * speed;
+        my += (y - my) * speed;
+
+        h1.innerHTML = "x: " + x + " mx: " + mx;
+        model.style.transform = "translate(" + (mx/6) + "px," + (my/6) + "px)";
+        background.style.transform = "translate(" + -(mx/6) + "px," + -(my/6) + "px)";
+
+        window.requestAnimationFrame(loop);
+      }
+    </script>
+
+</head>
+<body>
+  <h1>test</h1>
+  <img src="./images/model.png" alt="model" class="model">
+  <img src="./images/base.jpg" alt="background" class="background">
+</body>
+</html>
